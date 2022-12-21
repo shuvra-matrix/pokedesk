@@ -42,6 +42,10 @@ h1 {
     margin: 10px;
     padding: 20px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .pokemon .img-container {

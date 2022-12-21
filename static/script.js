@@ -1,5 +1,5 @@
 const pokeContainer = document.querySelector(".poke-container");
-const pokemonCount = 150;
+const pokemonCount = 2000;
 const color = {
   fire: "#FDDFDF",
   grass: "#DFFDE0",
@@ -27,7 +27,31 @@ const getPokemon = async (id) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
   const res = await fetch(url);
   const data = await res.json();
+  createPokemonCard(data);
   console.log(data);
+};
+
+const createPokemonCard = (pokemon) => {
+  const pokemonEl = document.createElement("div");
+  pokemonEl.classList.add("pokemon");
+  let pokemonNmae = pokemon.name[0].toUpperCase() + pokemon.name.slice(1);
+  let pokemonId = pokemon.id.toString().padStart(3, "0");
+  let pokemonType = pokemon.types[0].type.name;
+  const pokemoncardColor = color[pokemonType];
+  pokemonEl.style.backgroundColor = pokemoncardColor;
+  const pokemonDivInnerHtml = `
+        <div class="img-container">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png" alt="" />
+        </div>
+        <div class="info">
+            <span class="number">#${pokemonId}</span>
+            <h3 class="name">${pokemonNmae}</h3>
+            <small class="tyle">Type: <span>${pokemonType}</span></small>
+        </div>
+    `;
+
+  pokemonEl.innerHTML = pokemonDivInnerHtml;
+  pokeContainer.appendChild(pokemonEl);
 };
 
 fetchPokemon();
