@@ -16,3 +16,18 @@ const color = {
   fighting: "#E6E0D4",
   normal: "#F5F5F5",
 };
+
+const fetchPokemon = async () => {
+  for (let i = 1; i <= pokemonCount; i++) {
+    await getPokemon(i);
+  }
+};
+
+const getPokemon = async (id) => {
+  const url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  console.log(data);
+};
+
+fetchPokemon();
